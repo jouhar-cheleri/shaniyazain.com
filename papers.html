@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Papers - Shaniya K</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #f4f3ee;
+            --secondary-bg: #eeece2;
+            --text-primary: #3d3929;
+            --text-secondary: #b1ada1;
+            --accent-primary: #da7756;
+            --accent-secondary: #bd5d3a;
+            --accent-dark: #C15F3C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: rgba(244, 243, 238, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--secondary-bg);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary) !important;
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-primary) !important;
+            font-weight: 500;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: var(--secondary-bg);
+            color: var(--accent-primary) !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            background-color: var(--accent-primary);
+            color: white !important;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Papers Section */
+        .papers-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-primary);
+            border-radius: 2px;
+        }
+
+        .papers-grid {
+            display: grid;
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .paper-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(61, 57, 41, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid var(--secondary-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .paper-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(61, 57, 41, 0.15);
+        }
+
+        .paper-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            transition: width 0.3s ease;
+        }
+
+        .paper-card:hover::before {
+            width: 6px;
+        }
+
+        .paper-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .paper-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .paper-title-section {
+            flex: 1;
+        }
+
+        .paper-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .paper-journal {
+            color: var(--accent-primary);
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .paper-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .paper-abstract {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .paper-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .paper-tag {
+            background-color: var(--secondary-bg);
+            color: var(--text-primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .paper-status {
+            background-color: #e8f5e8;
+            color: #2d5a2d;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .paper-status.in-progress {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .paper-status.under-review {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .paper-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .paper-link {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .paper-link:hover {
+            color: var(--accent-secondary);
+            transform: translateX(2px);
+        }
+
+        .paper-link i {
+            font-size: 0.9rem;
+        }
+
+        /* Filter Buttons */
+        .filter-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: var(--secondary-bg);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--accent-primary);
+            color: white;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background-color: var(--secondary-bg);
+            padding: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(61, 57, 41, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .paper-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .paper-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .paper-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation for cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .paper-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .paper-card:nth-child(1) { animation-delay: 0.1s; }
+        .paper-card:nth-child(2) { animation-delay: 0.2s; }
+        .paper-card:nth-child(3) { animation-delay: 0.3s; }
+        .paper-card:nth-child(4) { animation-delay: 0.4s; }
+        .paper-card:nth-child(5) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Shaniya K</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="papers.html">My Papers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link " href="blogs.html">Blogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">My Research Papers</h1>
+            <p class="page-subtitle">
+                A collection of my academic research exploring social dynamics, healthcare accessibility, and the intersection of technology with human behavior. Each paper represents a commitment to evidence-based understanding of our evolving society.
+            </p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <!-- <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Published Papers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Under Review</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Collaborations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Research Areas</div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Papers Section -->
+    <section class="papers-section">
+        <div class="container">
+            <!-- Filter Buttons -->
+            <div class="filter-section">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Papers</button>
+                    <button class="filter-btn" data-filter="healthcare">Healthcare</button>
+                    <button class="filter-btn" data-filter="technology">Technology</button>
+                    <button class="filter-btn" data-filter="policy">Policy</button>
+                    <button class="filter-btn" data-filter="community">Community</button>
+                    <button class="filter-btn" data-filter="religion">Religion and Theology</button>
+                </div>
+            </div>
+
+            <!-- Papers Grid -->
+            <div class="papers-grid">
+                <!-- Paper 1 -->
+                <div class="paper-card" data-category="religion community">
+                    <div class="paper-header">
+                        <div class="paper-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="paper-title-section">
+                            <h3 class="paper-title">Interfaith Marriage in the Light of Quran and Sunnah</h3>
+                            <div class="paper-journal">Under Review</div>
+                            <div class="paper-date">2020</div>
+                        </div>
+                    </div>
+                    <p class="paper-abstract">
+                        The study examines the validity and implication of Interfaith Marriage in the light of quran and sunnath. It explores the theological, social, and legal dimensions of such unions, providing a comprehensive analysis of the challenges and opportunities they present in contemporary society.
+                    </p>
+                    <div class="paper-meta">
+                        <span class="paper-tag">Islam and society</span>
+                        <span class="paper-tag">Social Stigma</span>
+                        <span class="paper-status">under-review</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="#" class="paper-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Read Full Paper
+                        </a>
+                        <a href="#" class="paper-link">
+                            <i class="fas fa-download"></i>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paper 2 -->
+                <div class="paper-card" data-category="healthcare technology">
+                    <div class="paper-header">
+                        <div class="paper-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="paper-title-section">
+                            <h3 class="paper-title">A Sociological Study on the Usage of Mobile Phones During Pregnancy and Post-Pregnancy Phase: A Case Study of Kerala</h3>
+                            <div class="paper-journal">Social Science & Medicine</div>
+                            <div class="paper-date">2024</div>
+                        </div>
+                    </div>
+                    <p class="paper-abstract">
+                        This paper explores the impact of mobile phone usage on pregnant women during the pregnancy and post-pregnancy phases, focusing on a case study in Kerala.
+                    </p>
+                    <div class="paper-meta">
+                        <span class="paper-tag">Digital Sociology</span>
+                        <span class="paper-tag">Social Capital</span>
+                        <span class="paper-status under-review">Under Review</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="#" class="paper-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Read Full Paper
+                        </a>
+                        <a href="#" class="paper-link">
+                            <i class="fas fa-eye"></i>
+                            View Abstract
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paper 3 -->
+                <!-- <div class="paper-card" data-category="policy">
+                    <div class="paper-header">
+                        <div class="paper-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <div class="paper-title-section">
+                            <h3 class="paper-title">Policy Implementation and Community Response: Lessons from Urban Housing Reform</h3>
+                            <div class="paper-journal">Urban Studies</div>
+                            <div class="paper-date">2023</div>
+                        </div>
+                    </div>
+                    <p class="paper-abstract">
+                        This paper analyzes the implementation of housing policy reforms in three major cities, examining how community stakeholders navigate, resist, and adapt to policy changes, and the subsequent effects on neighborhood dynamics.
+                    </p>
+                    <div class="paper-meta">
+                        <span class="paper-tag">Policy Analysis</span>
+                        <span class="paper-tag">Urban Studies</span>
+                        <span class="paper-status">Published</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="#" class="paper-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Read Full Paper
+                        </a>
+                        <a href="#" class="paper-link">
+                            <i class="fas fa-download"></i>
+                            Download PDF
+                        </a>
+                    </div>
+                </div> -->
+
+                <!-- Paper 4 -->
+                <!-- <div class="paper-card" data-category="community">
+                    <div class="paper-header">
+                        <div class="paper-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="paper-title-section">
+                            <h3 class="paper-title">Community Resilience in Times of Crisis: Social Networks and Collective Action</h3>
+                            <div class="paper-journal">American Sociological Review</div>
+                            <div class="paper-date">2023</div>
+                        </div>
+                    </div>
+                    <p class="paper-abstract">
+                        Drawing from ethnographic fieldwork during the COVID-19 pandemic, this study examines how communities mobilize social networks and collective resources to respond to crises, highlighting the role of informal support systems.
+                    </p>
+                    <div class="paper-meta">
+                        <span class="paper-tag">Ethnography</span>
+                        <span class="paper-tag">Community Studies</span>
+                        <span class="paper-status">Published</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="#" class="paper-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Read Full Paper
+                        </a>
+                        <a href="#" class="paper-link">
+                            <i class="fas fa-download"></i>
+                            Download PDF
+                        </a>
+                    </div>
+                </div> -->
+
+                <!-- Paper 5 -->
+                <!-- <div class="paper-card" data-category="healthcare">
+                    <div class="paper-header">
+                        <div class="paper-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="paper-title-section">
+                            <h3 class="paper-title">Patient-Provider Communication in Multicultural Healthcare Settings</h3>
+                            <div class="paper-journal">Health Communication</div>
+                            <div class="paper-date">2023</div>
+                        </div>
+                    </div>
+                    <p class="paper-abstract">
+                        An investigation into how cultural differences impact patient-provider communication, examining language barriers, cultural competency, and their effects on health outcomes in diverse healthcare settings.
+                    </p>
+                    <div class="paper-meta">
+                        <span class="paper-tag">Health Communication</span>
+                        <span class="paper-tag">Cultural Studies</span>
+                        <span class="paper-status in-progress">In Progress</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="#" class="paper-link">
+                            <i class="fas fa-eye"></i>
+                            View Abstract
+                        </a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const paperCards = document.querySelectorAll('.paper-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filter = button.getAttribute('data-filter');
+
+                paperCards.forEach(card => {
+                    const categories = card.getAttribute('data-category').split(' ');
+                    if (filter === 'all' || categories.includes(filter)) {
+                        card.style.display = 'block';
+                        // Add fade-in animation
+                        card.style.animation = 'fadeInUp 0.6s ease-out';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add stagger animation delay
+        paperCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Paper link click handling (placeholder functionality)
+        document.querySelectorAll('.paper-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Add visual feedback
+                this.style.transform = 'translateX(4px)';
+                setTimeout(() => {
+                    this.style.transform = 'translateX(2px)';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

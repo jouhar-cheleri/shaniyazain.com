@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Drawings - Shaniya K</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #f4f3ee;
+            --secondary-bg: #eeece2;
+            --text-primary: #3d3929;
+            --text-secondary: #b1ada1;
+            --accent-primary: #da7756;
+            --accent-secondary: #bd5d3a;
+            --accent-dark: #C15F3C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: rgba(244, 243, 238, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--secondary-bg);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary) !important;
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-primary) !important;
+            font-weight: 500;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: var(--secondary-bg);
+            color: var(--accent-primary) !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            background-color: var(--accent-primary);
+            color: white !important;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .drawing-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(61, 57, 41, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid var(--secondary-bg);
+        }
+
+        .drawing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(61, 57, 41, 0.15);
+        }
+
+        .drawing-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, var(--secondary-bg), #e8e6da);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .drawing-placeholder {
+            font-size: 4rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .drawing-card:hover .drawing-placeholder {
+            transform: scale(1.1);
+            color: var(--accent-primary);
+        }
+
+        .drawing-content {
+            padding: 2rem;
+        }
+
+        .drawing-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .drawing-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .drawing-meta {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--secondary-bg);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .drawing-medium {
+            background-color: var(--secondary-bg);
+            color: var(--text-primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .drawing-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-left: auto;
+        }
+
+        /* Filter Buttons */
+        .filter-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: var(--secondary-bg);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--accent-primary);
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .drawing-image {
+                height: 240px;
+            }
+
+            .drawing-placeholder {
+                font-size: 3rem;
+            }
+
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation for cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .drawing-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .drawing-card:nth-child(1) { animation-delay: 0.1s; }
+        .drawing-card:nth-child(2) { animation-delay: 0.2s; }
+        .drawing-card:nth-child(3) { animation-delay: 0.3s; }
+        .drawing-card:nth-child(4) { animation-delay: 0.4s; }
+        .drawing-card:nth-child(5) { animation-delay: 0.5s; }
+        .drawing-card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Shaniya K</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="papers.html">My Papers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="gallery.html">Gallery</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link " href="blogs.html">Blogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">My Drawings</h1>
+            <p class="page-subtitle">
+                A visual exploration of ideas, emotions, and observations through art. Each piece represents a moment of creativity and reflection in my journey as both a researcher and artist.
+            </p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <!-- Filter Buttons -->
+            <div class="filter-section">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All </button>
+                    <button class="filter-btn" data-filter="Drawings">Drawings</button>
+                    <button class="filter-btn" data-filter="Photos">Photos</button>
+                    <button class="filter-btn" data-filter="lens">Society through my lens</button>
+                    <button class="filter-btn" data-filter="Other">Other</button>
+                </div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid">
+                <!-- Drawing 1 -->
+                <div class="drawing-card" data-category="Drawings">
+                    <div class="drawing-image">
+                        <img src="Images/Drawing/DRW1.jpg" alt="US" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title">We</h3>
+                        <p class="drawing-description">
+                            It is representation of my life , with my partner
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Acrylic</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drawing 2 -->
+               <div class="drawing-card" data-category="Drawings">
+                    <div class="drawing-image">
+                        <img src="Images/Drawing/DRW2.jpg" alt="US" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title">US</h3>
+                        <p class="drawing-description">
+                            It is another representation of my life , with my partner, the bright side
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Acrylic</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drawing 3 -->
+                 <div class="drawing-card" data-category="Photos">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/1.jpeg" alt="US" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drawing 4 -->
+                <div class="drawing-card" data-category="Photos">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/2.jpeg" alt="US" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drawing 5 -->
+                <div class="drawing-card" data-category="Photos lens">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/3.jpeg" alt="US" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drawing 6 -->
+                <div class="drawing-card" data-category="Photos lens">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/4.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 7 -->
+                <div class="drawing-card" data-category="Photos lens">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/5.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drawing 8 -->
+                 <div class="drawing-card" data-category="Photos Other">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/6.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 9 -->
+                 <div class="drawing-card" data-category="Photos Other">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/7.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 10 -->
+                 <div class="drawing-card" data-category="Photos Other">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/8.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 11 -->
+                 <div class="drawing-card" data-category="Photos Other">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/9.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 12 -->
+                 <div class="drawing-card" data-category="Photos lens">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/10.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 13 -->
+                 <div class="drawing-card" data-category="Photos Other">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/11.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 14 -->
+                 <div class="drawing-card" data-category="Photos">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/12.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 15 -->
+                 <div class="drawing-card" data-category="Photos">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/13.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 16 -->
+                 <div class="drawing-card" data-category="Photos">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/14.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 17 -->
+                 <div class="drawing-card" data-category="Photos">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/15.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 18 -->
+                 <div class="drawing-card" data-category="Photos">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/16.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 19 -->
+                 <div class="drawing-card" data-category="Photos">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/17.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 20 -->
+                 
+                <div class="drawing-card" data-category="Photos">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/18.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 21 -->
+                 
+                <div class="drawing-card" data-category="Photos">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/19.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 22 -->
+                 
+                <div class="drawing-card" data-category="Photos">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/20.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 23 -->
+                 
+                <div class="drawing-card" data-category="Photos">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/21.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drawing 24 -->
+                 
+                <div class="drawing-card" data-category="Photos">
+                    <div class="drawing-image">
+                        <img src="Images/Photos/22.jpeg" alt="" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="drawing-content">
+                        <h3 class="drawing-title"></h3>
+                        <p class="drawing-description">
+                            
+                        </p>
+                        <div class="drawing-meta">
+                            <span class="drawing-medium">Phone Gallery</span>
+                            <span class="drawing-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const drawingCards = document.querySelectorAll('.drawing-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filter = button.getAttribute('data-filter');
+
+                drawingCards.forEach(card => {
+                    const categories = card.getAttribute('data-category').split(' ');
+                    if (filter === 'all' || categories.includes(filter)) {
+                        card.style.display = 'block';
+                        // Add fade-in animation
+                        card.style.animation = 'fadeInUp 0.6s ease-out';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add stagger animation delay
+        drawingCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+    </script>
+</body>
+</html>

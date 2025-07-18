@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Quotes - Shaniya K</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #f4f3ee;
+            --secondary-bg: #eeece2;
+            --text-primary: #3d3929;
+            --text-secondary: #b1ada1;
+            --accent-primary: #da7756;
+            --accent-secondary: #bd5d3a;
+            --accent-dark: #C15F3C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: rgba(244, 243, 238, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--secondary-bg);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary) !important;
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-primary) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: var(--secondary-bg);
+            color: var(--accent-primary) !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            background-color: var(--accent-primary);
+            color: white !important;
+        }
+
+        /* Hero Section */
+        .quotes-hero {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .quotes-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .quotes-hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 3rem 0;
+            background-color: white;
+            border-bottom: 1px solid var(--secondary-bg);
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--secondary-bg);
+            background-color: transparent;
+            color: var(--text-primary);
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(218, 119, 86, 0.3);
+        }
+
+        /* Quotes Grid */
+        .quotes-section {
+            padding: 4rem 0;
+            background-color: var(--primary-bg);
+        }
+
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .quote-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(61, 57, 41, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        .quote-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(61, 57, 41, 0.15);
+        }
+
+        .quote-icon {
+            font-size: 3rem;
+            color: var(--accent-primary);
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        .quote-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote-text::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--accent-primary);
+            opacity: 0.2;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            font-family: Georgia, serif;
+        }
+
+        .quote-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--secondary-bg);
+        }
+
+        .quote-category {
+            background-color: var(--secondary-bg);
+            color: var(--text-primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .quote-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .quote-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .quote-action {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .quote-action:hover {
+            background-color: var(--secondary-bg);
+            color: var(--accent-primary);
+        }
+
+        /* Special quote styles */
+        .featured-quote {
+            grid-column: 1 / -1;
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .featured-quote .quote-icon {
+            color: white;
+        }
+
+        .featured-quote .quote-text {
+            color: white;
+            font-size: 1.4rem;
+        }
+
+        .featured-quote .quote-text::before {
+            color: white;
+        }
+
+        .featured-quote .quote-category {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .featured-quote .quote-date {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            padding: 4rem 0;
+            background-color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            background-color: var(--primary-bg);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Animation for quotes appearing */
+        .quote-card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .quote-card:nth-child(1) { animation-delay: 0.1s; }
+        .quote-card:nth-child(2) { animation-delay: 0.2s; }
+        .quote-card:nth-child(3) { animation-delay: 0.3s; }
+        .quote-card:nth-child(4) { animation-delay: 0.4s; }
+        .quote-card:nth-child(5) { animation-delay: 0.5s; }
+        .quote-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .quotes-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .quotes-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .quote-card {
+                padding: 2rem;
+            }
+
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--secondary-bg);
+            border-top: 4px solid var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="Index.html">Shaniya K</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Index.html#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="papers.html">My Papers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="quotes.html">My Quotes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="quotes-hero">
+        <div class="container">
+            <h1>My Quotes</h1>
+            <p>Thoughts, reflections, and insights from my journey through sociology, research, and life. Each quote represents a moment of clarity or a spark of inspiration that has shaped my understanding of the world.</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Quotes</button>
+                <button class="filter-btn" data-filter="sociology">Sociology</button>
+                <button class="filter-btn" data-filter="research">Research</button>
+                <button class="filter-btn" data-filter="life">Life Philosophy</button>
+                <button class="filter-btn" data-filter="technology">Technology</button>
+                <button class="filter-btn" data-filter="faith">Faith & Values</button>
+                <button class="filter-btn" data-filter="inspiration">Inspiration</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">127</div>
+                    <div class="stat-label">Total Quotes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Years of Collection</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Inspiration</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quotes Section -->
+    <section class="quotes-section">
+        <div class="container">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading quotes...</p>
+            </div>
+            
+            <div class="quotes-grid" id="quotesGrid">
+                <!-- Featured Quote -->
+                <div class="quote-card featured-quote" data-category="inspiration">
+                    <div class="quote-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="quote-text">
+                        Society is not a machine to be fixed, but a living tapestry to be understood, appreciated, and gently guided toward greater harmony.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Inspiration</span>
+                        <span class="quote-date">March 2024</span>
+                    </div>
+                </div>
+
+                <!-- Sociology Quotes -->
+                <div class="quote-card" data-category="sociology">
+                    <div class="quote-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="quote-text">
+                        Every individual's story is a thread in the vast social fabric. Understanding these connections is what makes sociology not just a discipline, but a way of seeing the world.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Sociology</span>
+                        <span class="quote-date">February 2024</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <div class="quote-card" data-category="sociology">
+                    <div class="quote-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="quote-text">
+                        Social change doesn't happen overnight, but it starts with understanding. Every research question we ask brings us closer to a more just society.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Sociology</span>
+                        <span class="quote-date">January 2024</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <div class="quote-card" data-category="sociology">
+                    <div class="quote-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="quote-text">
+                        Culture is not a prison but a playground. It shapes us, yes, but we also have the power to reshape it for future generations.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Sociology</span>
+                        <span class="quote-date">December 2023</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <!-- Research Quotes -->
+                <div class="quote-card" data-category="research">
+                    <div class="quote-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <div class="quote-text">
+                        Good research is like good art - it reveals truths that were always there, waiting to be discovered and shared with the world.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Research</span>
+                        <span class="quote-date">March 2024</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <div class="quote-card" data-category="research">
+                    <div class="quote-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="quote-text">
+                        Data without empathy is just numbers. Research without humanity is just statistics. The magic happens when we combine both.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Research</span>
+                        <span class="quote-date">February 2024</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <div class="quote-card" data-category="research">
+                    <div class="quote-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="quote-text">
+                        Every fieldwork experience teaches me that theories are just the beginning. Real understanding comes from listening to real people tell their real stories.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Research</span>
+                        <span class="quote-date">November 2023</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <!-- Life Philosophy Quotes -->
+                <div class="quote-card" data-category="life">
+                    <div class="quote-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="quote-text">
+                        Life is not about finding yourself, it's about creating yourself. And in that creation, we have the power to contribute to something greater than ourselves.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Life Philosophy</span>
+                        <span class="quote-date">April 2024</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <div class="quote-card" data-category="life">
+                    <div class="quote-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="quote-text">
+                        Drawing and sociology are not so different. Both require observation, patience, and the ability to see patterns that others might miss.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Life Philosophy</span>
+                        <span class="quote-date">March 2024</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <!-- Technology Quotes -->
+                <div class="quote-card" data-category="technology">
+                    <div class="quote-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="quote-text">
+                        Technology is not inherently good or bad - it amplifies human nature. Our job as researchers is to understand how it shapes our social interactions.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Technology</span>
+                        <span class="quote-date">February 2024</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <div class="quote-card" data-category="technology">
+                    <div class="quote-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="quote-text">
+                        In studying mobile phone usage during pregnancy, I learned that technology doesn't just connect us to information - it connects us to each other in profound ways.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Technology</span>
+                        <span class="quote-date">January 2024</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <!-- Faith & Values Quotes -->
+                <div class="quote-card" data-category="faith">
+                    <div class="quote-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="quote-text">
+                        Faith and reason are not opposites - they are complementary lenses through which we can understand the complexity of human experience.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Faith & Values</span>
+                        <span class="quote-date">March 2024</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <div class="quote-card" data-category="faith">
+                    <div class="quote-icon">
+                        <i class="fas fa-peace"></i>
+                    </div>
+                    <div class="quote-text">
+                        Studying interfaith relationships taught me that love transcends boundaries, and understanding transcends differences.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Faith & Values</span>
+                        <span class="quote-date">December 2023</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <!-- Inspiration Quotes -->
+                <div class="quote-card" data-category="inspiration">
+                    <div class="quote-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="quote-text">
+                        Every small act of understanding, every moment of genuine connection, every research insight - these are the seeds of positive change.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Inspiration</span>
+                        <span class="quote-date">April 2024</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <div class="quote-card" data-category="inspiration">
+                    <div class="quote-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <div class="quote-text">
+                        The beauty of sociology is that it reminds us we're all connected. In understanding others, we understand ourselves. In helping others, we help ourselves.
+                    </div>
+                    <div class="quote-meta">
+                        <span class="quote-category">Inspiration</span>
+                        <span class="quote-date">February 2024</span>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="quote-action" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="quote-action" title="Favorite"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const quoteCards = document.querySelectorAll('.quote-card');
+        const loading = document.getElementById('loading');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                // Show loading animation
+                loading.classList.add('show');
+                
+                // Simulate loading delay for smooth UX
+                setTimeout(() => {
+                    const filter = button.getAttribute('data-filter');
+                    
+                    quoteCards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        
+                        if (filter === 'all' || category === filter) {
+                            card.style.display = 'block';
+                            // Reset animation
+                            card.style.animation = 'none';
+                            card.offsetHeight; // Trigger reflow
+                            card.style.animation = 'fadeInUp 0.6s ease forwards';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    
+                    loading.classList.remove('show');
+                }, 500);
+            });
+        });
+
+        // Quote actions
+        document.querySelectorAll('.quote-action').forEach(action => {
+            action.addEventListener('click', (e) => {
+                e.preventDefault();
+                const button = e.currentTarget;
+                const icon = button.querySelector('i');
+                
+                // Add animation effect
+                button.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    button.style.transform = 'scale(1)';
+                }, 200);
+
+                // Handle different actions
+                if (icon.classList.contains('fa-heart')) {
+                    // Toggle favorite
+                    if (icon.classList.contains('fas')) {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                    } else {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                    }
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function

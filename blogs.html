@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blogs - Shaniya K</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #f4f3ee;
+            --secondary-bg: #eeece2;
+            --text-primary: #3d3929;
+            --text-secondary: #b1ada1;
+            --accent-primary: #da7756;
+            --accent-secondary: #bd5d3a;
+            --accent-dark: #C15F3C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: rgba(244, 243, 238, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--secondary-bg);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary) !important;
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-primary) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: var(--secondary-bg);
+            color: var(--accent-primary) !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            background-color: var(--accent-primary);
+            color: white !important;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            padding: 8rem 0 4rem;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Blog Section */
+        .blogs-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .blog-card {
+            background-color: var(--primary-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(61, 57, 41, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(61, 57, 41, 0.15);
+        }
+
+        .blog-featured-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover .blog-featured-image {
+            transform: scale(1.05);
+        }
+
+        .blog-content {
+            padding: 2.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .blog-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .blog-category {
+            background-color: var(--accent-primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .blog-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .blog-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .blog-title a:hover {
+            color: var(--accent-primary);
+        }
+
+        .blog-excerpt {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .blog-tag {
+            background-color: var(--secondary-bg);
+            color: var(--text-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .blog-tag:hover {
+            background-color: var(--accent-primary);
+            color: white;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            color: var(--accent-secondary);
+            transform: translateX(5px);
+        }
+
+        .read-more-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .read-more-btn:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Coming Soon Section */
+        .coming-soon {
+            background-color: var(--secondary-bg);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .coming-soon-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .coming-soon h3 {
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem 1.2rem;
+            border: 2px solid var(--secondary-bg);
+            border-radius: 50px;
+            font-size: 1rem;
+            background-color: white;
+            color: var(--text-primary);
+            transition: border-color 0.3s ease;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .newsletter-btn {
+            background-color: var(--accent-primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .newsletter-btn:hover {
+            background-color: var(--accent-secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .blog-content {
+                padding: 2rem;
+            }
+
+            .blog-title {
+                font-size: 1.5rem;
+            }
+
+            .blog-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .navbar-nav .nav-link {
+                margin: 0.2rem 0;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Blog Image Overlay */
+        .blog-image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(218, 119, 86, 0.8), rgba(189, 93, 58, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .blog-card:hover .blog-image-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="Index.html">Shaniya K</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Index.html#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="papers.html">My Papers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="quotes.html">My Quotes</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="blogs.html">Blogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">My Blogs</h1>
+            <p class="page-subtitle">
+                Exploring the fascinating intersections of society, technology, and human behavior through personal reflections and research insights.
+            </p>
+        </div>
+    </section>
+
+    <!-- Blog Posts Section -->
+    <section class="blogs-section">
+        <div class="container">
+            <div class="row">
+                <!-- Blog Post 1 -->
+                <div class="col-lg-8 offset-lg-2">
+                    <article class="blog-card">
+                        <div class="blog-image-container">
+                            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&h=300&fit=crop" alt="Digital society concept" class="blog-featured-image">
+                            <div class="blog-image-overlay">
+                                <span>Read More</span>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <div class="blog-date">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>January 15, 2024</span>
+                                </div>
+                                <div class="blog-category">Technology & Society</div>
+                            </div>
+                            <h2 class="blog-title">
+                                <a href="#blog1">The Digital Divide: How Technology Shapes Social Inequalities in Rural Communities</a>
+                            </h2>
+                            <p class="blog-excerpt">
+                                During my fieldwork in Kerala, I observed how digital transformation isn't just about access to technology—it's about who gets to participate in the digital economy and who gets left behind. This post explores the nuanced ways technology can both bridge and widen social gaps in rural communities.
+                            </p>
+                            <div class="blog-tags">
+                                <span class="blog-tag">Digital Sociology</span>
+                                <span class="blog-tag">Rural Studies</span>
+                                <span class="blog-tag">Social Inequality</span>
+                                <span class="blog-tag">Kerala</span>
+                            </div>
+                            <a href="#blog1" class="read-more-btn">
+                                Continue Reading <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Blog Post 2 -->
+                <div class="col-lg-8 offset-lg-2">
+                    <article class="blog-card">
+                        <div class="blog-image-container">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&h=300&fit=crop" alt="Interfaith dialogue" class="blog-featured-image">
+                            <div class="blog-image-overlay">
+                                <span>Read More</span>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <div class="blog-date">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>December 8, 2023</span>
+                                </div>
+                                <div class="blog-category">Religion & Society</div>
+                            </div>
+                            <h2 class="blog-title">
+                                <a href="#blog2">Beyond the Academic: Personal Reflections on Interfaith Research</a>
+                            </h2>
+                            <p class="blog-excerpt">
+                                Working on my thesis about interfaith marriages taught me that research is never just academic—it's deeply personal. Here, I share the emotional journey of studying sensitive topics, the conversations that changed my perspective, and why I believe sociology needs more heart alongside its methodology.
+                            </p>
+                            <div class="blog-tags">
+                                <span class="blog-tag">Interfaith Studies</span>
+                                <span class="blog-tag">Research Methods</span>
+                                <span class="blog-tag">Personal Reflection</span>
+                                <span class="blog-tag">Islamic Studies</span>
+                            </div>
+                            <a href="#blog2" class="read-more-btn">
+                                Continue Reading <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="coming-soon">
+        <div class="container">
+            <div class="coming-soon-content">
+                <h3>More Stories Coming Soon</h3>
+                <p>I'm working on several new posts about art as a research tool, the intersection of health and technology, and field work adventures. Want to be notified when I publish something new?</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email">
+                    <button type="submit" class="newsletter-btn">
+                        <i class="fas fa-bell me-2"></i>
+                        Notify Me
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation link on scroll
+        window.addEventListener('scroll', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === 'blogs.html') {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Newsletter form handling
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.newsletter-input').value;
+            if (email) {
+                alert('Thank you for subscribing! I\'ll let you know when new posts are published.');
+                this.querySelector('.newsletter-input').value = '';
+            }
+        });
+
+        // Blog card hover effects
+        document.querySelectorAll('.blog-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Tag hover effects
+        document.querySelectorAll('.blog-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                // Future functionality: filter posts by tag
+                console.log('Filter by tag:', this.textContent);
+            });
+        });
+    </script>
+</body>
+</html>

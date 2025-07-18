@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaniya K - Sociologist & Researcher</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #f4f3ee;
+            --secondary-bg: #eeece2;
+            --text-primary: #3d3929;
+            --text-secondary: #b1ada1;
+            --accent-primary: #da7756;
+            --accent-secondary: #bd5d3a;
+            --accent-dark: #C15F3C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: rgba(244, 243, 238, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--secondary-bg);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary) !important;
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-primary) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: var(--secondary-bg);
+            color: var(--accent-primary) !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            background-color: var(--accent-primary);
+            color: white !important;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-primary);
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 8rem 0 6rem;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            background-color: var(--accent-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(218, 119, 86, 0.3);
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(218, 119, 86, 0.4);
+            color: white;
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-photo {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(218, 119, 86, 0.2);
+            border: 4px solid var(--accent-primary);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        /* Experience Section */
+        .experience-section {
+            background-color: var(--secondary-bg);
+        }
+
+        .experience-item {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(61, 57, 41, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .experience-company {
+            color: var(--accent-primary);
+            font-weight: 500;
+        }
+
+        .experience-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .experience-description {
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .experience-description ul {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .experience-description li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Education Section */
+        .education-section {
+            background-color: white;
+        }
+
+        .education-item {
+            background-color: var(--primary-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-primary);
+            transition: transform 0.3s ease;
+        }
+
+        .education-item:hover {
+            transform: translateX(5px);
+        }
+
+        .education-degree {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-institution {
+            color: var(--accent-primary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-year {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Research Section */
+        .research-section {
+            background-color: var(--secondary-bg);
+        }
+
+        .research-item {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(61, 57, 41, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .research-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .research-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .research-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-info {
+            font-size: 1.1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: var(--primary-bg);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background-color: var(--secondary-bg);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .contact-text a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .contact-text a:hover {
+            color: var(--accent-primary);
+        }
+
+        .contact-message {
+            background-color: var(--primary-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .contact-message h4 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-message p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .profile-photo {
+                width: 200px;
+                height: 200px;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar-nav .nav-link {
+                margin: 0.2rem 0;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">Shaniya K</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Index.html#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="papers.html">My Papers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="quotes.html">My Quotes</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link " href="blogs.html">Blogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Shaniya K</h1>
+                <p class="hero-subtitle">Sociologist & Researcher</p>
+                <p class="hero-description">
+                    Exploring the intersection of society, technology, and human behavior through the lens of anthropology, theology, and health sciences to drive meaningful change and create impactful policies.
+                </p>
+                <a href="#about" class="cta-button">
+                    <i class="fas fa-arrow-down me-2"></i>
+                    Learn More About Me
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="images/Profile.jpeg" alt="Shaniya K" class="profile-photo">
+                </div>
+                <div class="about-text">
+                    <p>
+                        Hello! I'm Shaniya, a <span class="highlight">passionate sociologist</span> who believes in the power of interdisciplinary thinking to understand and improve our world. My journey combines rigorous academic research with creative expression and diverse intellectual pursuits.
+                    </p>
+                    <p>
+                        Beyond traditional sociology, I explore the fascinating intersections of <span class="highlight">anthropology, theology, health sciences, and technology</span>. This multidisciplinary approach allows me to bring unique perspectives to complex social challenges and policy development.
+                    </p>
+                    <p>
+                        When I'm not conducting research or analyzing data, you'll find me <span class="highlight">drawing and sketching</span> – a creative outlet that helps me visualize social patterns and human connections in new ways. I believe that art and science complement each other beautifully in understanding the human experience.
+                    </p>
+                    <p>
+                        My work focuses on <span class="highlight">stakeholder engagement</span>, policy analysis, and fieldwork, always with an eye toward creating meaningful change. I'm particularly interested in how emerging technologies shape social dynamics and how we can harness these changes for positive societal impact.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Experience Section -->
+    <section id="experience" class="experience-section section">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-title">Research Intern</h3>
+                                <p class="experience-company">Impact Metrics, Calicut, Kerala</p>
+                            </div>
+                            <span class="experience-date">Sep 2023 - Mar 2024</span>
+                        </div>
+                        <div class="experience-description">
+                            <ul>
+                                <li>Developed comprehensive project documents and data collection forms for social impact initiatives</li>
+                                <li>Conducted extensive research and compiled materials for various community-focused projects</li>
+                                <li>Contributed to the design and implementation of research methodologies and frameworks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-title">Research Intern</h3>
+                                <p class="experience-company">People's Foundation, Calicut, Kerala</p>
+                            </div>
+                            <span class="experience-date">Nov 2021 - Jan 2022</span>
+                        </div>
+                        <div class="experience-description">
+                            <ul>
+                                <li>Contributed to groundbreaking research focused on the upliftment of paraplegia patients</li>
+                                <li>Supported the research team in enhancing project outcomes and methodology</li>
+                                <li>Assisted in content development, data analysis, and comprehensive document preparation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education-section section">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="education-item">
+                        <h3 class="education-degree">Master of Arts in Sociology</h3>
+                        <p class="education-institution">Central University of Punjab</p>
+                        <p class="education-year">2023</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="education-item">
+                        <h3 class="education-degree">Bachelor of Arts (General)</h3>
+                        <p class="education-institution">Jamia Millia Islamia, New Delhi</p>
+                        <p class="education-year">2020</p>
+                        <p class="education-year">Majors: Sociology, English, Islamic Studies</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="education-item">
+                        <h3 class="education-degree">Bachelor of Arts - Islamic Shari'a</h3>
+                        <p class="education-institution">Al Jamia Al Islamiya, Santapuram, Kerala</p>
+                        <p class="education-year">2020</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research & Publications Section -->
+    <section id="research" class="research-section section">
+        <div class="container">
+            <h2 class="section-title">Research & Publications</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="research-item">
+                        <h3 class="research-title">Interfaith Marriage in the Light of Quran and Sunnah</h3>
+                        <p class="research-description">
+                            An in-depth theological and sociological examination of interfaith marriages, exploring religious perspectives, social implications, and contemporary challenges. This research bridges traditional Islamic scholarship with modern sociological analysis.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="research-item">
+                        <h3 class="research-title">A Sociological Study on the Usage of Mobile Phones During Pregnancy and Post-Pregnancy Phase: A Case Study of Kerala</h3>
+                        <p class="research-description">
+                            A comprehensive field study examining the impact of mobile phone usage on maternal health and social behavior in Kerala. This research combines health sociology with technology studies to understand digital behavior patterns during critical life phases.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h5>Email</h5>
+                            <a href="mailto:Shaniyazain88@gmail.com">Shaniyazain88@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h5>Location</h5>
+                            <p>Shameema's, Varamroad<br>P.O Kannadipparamba, Kannur<br>Kerala, 670604</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-message">
+                    <h4>Let's Connect!</h4>
+                    <p>I'm always interested in discussing research opportunities, collaboration projects, or sharing insights about sociology, technology, and social change.</p>
+                    <a href="mailto:Shaniyazain88@gmail.com" class="cta-button">
+                        <i class="fas fa-paper-plane me-2"></i>
+                        Send Message
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation link on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
